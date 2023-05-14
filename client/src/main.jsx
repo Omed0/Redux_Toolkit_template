@@ -16,7 +16,7 @@ const router = createBrowserRouter({
   routes: [
     {
       path: '/',
-      action: () => import('./pages/Home/Home.jsx'),
+      action: () => import('./pages/Home/home.jsx'),
       Element: <App />,
       errorElement: <ErrorBoundary />,
       // children: [
@@ -28,7 +28,7 @@ const router = createBrowserRouter({
     },
     {
       path: '/about',
-      action: () => import('./pages/About.jsx'),
+      action: () => import('./pages/About/about.jsx'),
       Element: <About />,
       errorElement: <ErrorBoundary />,
     },
