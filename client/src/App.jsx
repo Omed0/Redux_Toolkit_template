@@ -3,7 +3,7 @@ import PostsList from "./features/posts/postsList"
 function App() {
 
   return (
-    <main>
+    <main className="">
       <PostsList />
     </main>
   )
