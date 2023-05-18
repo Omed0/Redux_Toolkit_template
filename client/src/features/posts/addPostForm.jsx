@@ -17,6 +17,7 @@ export default function addPostForm() {
 
     const handleChange = (e) => {
         const { name, value } = e.target
+        console.log(postData)
         setPostData({
             ...postData,
             [name]: value
@@ -53,8 +54,7 @@ export default function addPostForm() {
                     value={postData.title}
                 />
                 <label htmlFor="postAuther">Author:</label>
-                <select value={postData.userId} name="userId" id="postAuther" onChange={handleChange} >
-                    <option value=""></option>
+                <select className="border-2 border-white rounded-md p-2" value={postData.userId} name="userId" id="postAuther" onChange={handleChange} >
                     {usersOptions}
                 </select>
 

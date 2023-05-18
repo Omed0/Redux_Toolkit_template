@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectAllPosts } from "./postsSlice";
+import PostAuther from "./postAuther";
 
 
 export default function postsList() {
@@ -8,6 +9,9 @@ export default function postsList() {
         <article key={post.id} className="border-2 min-w-xs max-w-md p-4 shadow shadow-slate-300">
             <h3 className="text-2xl font-semibold mb-2">{post.title}</h3>
             <p>{post.content.substring(0, 100)}</p>
+            <p className="mt-6">
+                <PostAuther userId={post.userId} />
+            </p>
         </article>
     ))
 
