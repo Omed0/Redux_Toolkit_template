@@ -1,8 +1,17 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { sub } from "date-fns";
 
 const initialState = [
-    { id: "1", title: "Redux Toolkit!", content: "You Should Learn Redux Toolkit form Managmnet State!" },
-    { id: "2", title: "Next JS", content: "NextJS is improve SEO performance" },
+    {
+        id: "1", title: "Redux Toolkit!",
+        content: "You Should Learn Redux Toolkit form Managmnet State!",
+        date: sub(new Date(), { minutes: 10 }).toISOString()
+    },
+    {
+        id: "2", title: "Next JS",
+        content: "NextJS is improve SEO performance",
+        date: sub(new Date(), { minutes: 5 }).toISOString()
+    },
 ]
 
 const postsSlice = createSlice({
@@ -19,6 +28,7 @@ const postsSlice = createSlice({
                         id: nanoid(),
                         title,
                         content,
+                        date: new Date().toISOString(),
                         userId
                     }
                 }
