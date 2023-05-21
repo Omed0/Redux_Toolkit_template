@@ -4,9 +4,11 @@ import AddPostForm from "./features/posts/addPostForm"
 function App() {
 
   return (
-    <main className="">
+    <main className="w-full">
       <AddPostForm />
-      <PostsList />
+      <section className="w-full p-3 flex bg-slate-400">
+        <PostsList />
+      </section>
     </main>
   )
 }

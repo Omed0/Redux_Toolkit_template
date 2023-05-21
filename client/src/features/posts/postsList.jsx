@@ -10,14 +10,16 @@ export default function postsList() {
     const orderPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
     const renderedPost = orderPosts.map(post => (
-        <article key={post.id} className="border-2 min-w-xs max-w-md p-4 shadow shadow-slate-300">
+        <article key={post.id} className="border-2 min-w-xs max-w-lg p-4 shadow shadow-slate-300 rounded-lg">
             <h3 className="text-2xl font-semibold mb-2">{post.title}</h3>
             <p>{post.content.substring(0, 100)}</p>
             <p className="mt-6">
                 <PostAuther userId={post.userId} />
                 <TimeAgo timestamp={post.date} />
             </p>
-            <ReactionButtons post={post} />
+            <div className="">
+                <ReactionButtons post={post} />
+            </div>
         </article>
     ))
 
