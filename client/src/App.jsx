@@ -6,7 +6,7 @@ function App() {
   return (
     <main className="w-full">
       <AddPostForm />
-      <section className="w-full p-3 flex bg-slate-400">
+      <section className="w-full p-3 flex">
         <PostsList />
       </section>
     </main>
