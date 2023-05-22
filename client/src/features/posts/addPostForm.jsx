@@ -12,7 +12,7 @@ export default function addPostForm() {
         {
             title: '',
             content: '',
-            userId: '',
+            userId: 0,
         }
     )
     const [addRequestStatus, setAddRequestStatus] = useState('idle')

@@ -11,21 +11,13 @@ const initialState = {
 }
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-    try {
-        const response = await axios.get(POSTS_URL)
-        return response.data
-    } catch (err) {
-        return err.message;
-    }
+    const response = await axios.get(POSTS_URL)
+    return response.data
 })
 
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost) => {
-    try {
-        const response = await axios.post(POSTS_URL, initialPost)
-        return response.data
-    } catch (err) {
-        return err.message;
-    }
+    const response = await axios.post(POSTS_URL, initialPost)
+    return response.data
 })
 
 const postsSlice = createSlice({
@@ -57,7 +49,7 @@ const postsSlice = createSlice({
         },
         reactionAdded(state, action) {
             const { postId, reaction } = action.payload
-            const existingPost = state.find(post => post.id === postId)
+            const existingPost = state.posts.find(post => post.id === postId)
             if (existingPost) {
                 existingPost.reactions[reaction]++
             }
