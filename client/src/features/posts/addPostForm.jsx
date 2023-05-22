@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postAdded } from "./postsSlice";
+import { addNewPost } from "./postsSlice";
 import { selectAllUsers } from "../users/usersSlice";
+import { set } from "date-fns";
 
 export default function addPostForm() {
 
@@ -14,6 +15,7 @@ export default function addPostForm() {
             userId: '',
         }
     )
+    const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -23,10 +25,23 @@ export default function addPostForm() {
             [name]: value
         })
     }
+
+    const canSave = [postData.title, postData.content, postData.userId].every(Boolean) && addRequestStatus === 'idle'
+
     const onSavePostClicked = () => {
-        if (postData) {
-            dispatch(postAdded(postData.title, postData.content, postData.userId))
-            setPostData({ title: '', content: '' })
+        try {
+
+            if (canSave) {
+                setAddRequestStatus('pending')
+                dispatch(addNewPost({ title: postData.title, body: postData.content, userId: postData.userId }))
+            }
+
+            setPostData({ title: '', content: '', userId: '' })
+
+        } catch (err) {
+            console.error('Failed to save the post: ', err.message);
+        } finally {
+            setAddRequestStatus('idle')
         }
     }
 
@@ -38,7 +53,6 @@ export default function addPostForm() {
         )
     })
 
-    const canSave = Boolean(postData.title) && Boolean(postData.content) && Boolean(postData.userId)
 
     return (
         <section className="flex flex-col min-w-[18rem] items-start p-4 gap-4">
