@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewPost } from "./postsSlice";
 import { selectAllUsers } from "../users/usersSlice";
-import { set } from "date-fns";
+// import { set } from "date-fns";
 
 export default function addPostForm() {
 
