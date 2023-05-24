@@ -12,8 +12,9 @@ html {
 
 body {
   min-height: 100vh;
+  max-width: 1200px;
+  margin: auto;
   font-size: 1.5rem;
-  width: 100%;
 }
 
 input,
@@ -26,16 +27,18 @@ select {
 
 header {
   width: 100%;
-  min-width: 320px;
-  padding: 1.4rem;
+  min-width: 340px;
+  padding: 0.8rem 1.6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 0 0 10px 10px;
 
   background-color: purple;
   color: whitesmoke;
   position: sticky;
   top: 0;
+  z-index: 99;
 }
 
 nav {
@@ -65,7 +68,7 @@ nav a:focus {
 }
 
 main {
-  max-width: 1200px;
+  max-width: 100%;
   margin: auto;
 }
 
@@ -81,11 +84,7 @@ article {
 }
 
 h1 {
-  font-size: 3.5rem;
-}
-
-h2 {
-  margin-bottom: 1rem;
+  font-size: 3rem;
 }
 
 p {

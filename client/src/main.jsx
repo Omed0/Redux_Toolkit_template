@@ -3,18 +3,47 @@ import ReactDOM from 'react-dom/client'
 import './main.css'
 
 import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
+//pages
+import Home from './pages/Home/home'
+import About from './pages/About/about'
+//users
+import Users from './pages/Users/users'
+import ProfileUser from './pages/Users/user/profileUser'
 
-// import { store } from './app/store.js';
-// import { Provider } from 'react-redux'
+import NoMatch from './components/error/noMatch'
+import ErrorPage from './components/error/error-page'
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider
+} from 'react-router-dom'
+
+import { store } from './app/store.js';
+import { Provider } from 'react-redux'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" errorElement={<ErrorPage />} element={<App />} >
+
+      <Route index={true} element={<Home />} />
+      <Route path='about' element={<About />} />
+      <Route path="user">
+        <Route element={<Users />} />
+        <Route path=":id" element={<ProfileUser />} />
+      </Route>
+
+      <Route path="*" element={<NoMatch to="/" />} />
+    </Route>
+  )
+)
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    {/* </Provider> */}
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 )
