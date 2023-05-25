@@ -7,10 +7,10 @@ const initialState = {
 }
 
 const postSlice = createSlice({
-    name: 'posts',
+    name: 'post',
     initialState,
     reducers: {
-        getPosts: (state, action) => {
+        getPostsLoading: (state, action) => {
             state.status = 'loading'
         },
         getPostsSuccess: (state, action) => {
@@ -32,6 +32,8 @@ const postSlice = createSlice({
     }
 })
 
-export const { getPosts, getPostsSuccess, addPostSuccess, deletePostSuccess, PostsFailure } = postSlice.actions;
+export const selectAllPosts = state => state.post.posts
+
+export const { getPostsLoading, getPostsSuccess, addPostSuccess, deletePostSuccess, PostsFailure } = postSlice.actions;
 
 export default postSlice.reducer

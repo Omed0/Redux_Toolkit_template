@@ -6,6 +6,7 @@ import postSlice from "../features/posts/postSlice";
 export const store = configureStore({
     reducer: {
         // auth: authSlice,
+        post: postSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

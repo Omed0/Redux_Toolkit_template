@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+
 
 export default function Users() {
     return (
@@ -7,7 +7,6 @@ export default function Users() {
                 <h1>Users</h1>
                 <p>hello this is Users Page List</p>
             </section>
-            <Outlet />
         </div>
     )
 }

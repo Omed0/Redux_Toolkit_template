@@ -1,3 +1,8 @@
+/* add tailwind configration in main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -103,34 +108,12 @@ textarea {
   height: 200px;
 }
 
-.postCredit {
-  font-size: 1rem;
-}
+@layer components {
+  .btn {
+    @apply px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 duration-300 ease-in-out font-semibold;
+  }
 
-.postCredit a,
-.postCredit a:visited {
-  margin-right: 0.5rem;
-  color: black;
-}
-
-.postCredit a:hover,
-.postCredit a:focus {
-  color: hsla(0, 0%, 0%, 0.75);
-}
-
-.excerpt {
-  font-style: italic;
-}
-
-.reactionButton {
-  margin: 0 0.25em 0 0;
-  background: transparent;
-  border: none;
-  color: #000;
-  font-size: 1rem;
-}
-
-.deleteButton {
-  background-color: palevioletred;
-  color: white;
+  .input {
+    @apply px-4 py-2 border-purple-600 border-4 rounded-md hover:border-purple-700 duration-300 ease-in-out outline-none;
+  }
 }

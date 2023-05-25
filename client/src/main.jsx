@@ -5,7 +5,9 @@ import './main.css'
 import App from './App.jsx'
 //pages
 import Home from './pages/Home/home'
-import About from './pages/About/about'
+import AddPost from './pages/Posts/addPost/AddPost'
+import ListPosts from './pages/Posts/Posts'
+import Post from './pages/Posts/post/Post'
 //users
 import Users from './pages/Users/users'
 import ProfileUser from './pages/Users/user/profileUser'
@@ -28,9 +30,15 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<ErrorPage />} element={<App />} >
 
       <Route index={true} element={<Home />} />
-      <Route path='about' element={<About />} />
+
+      <Route path='post' >
+        <Route index={true} element={<ListPosts />} />
+        <Route path='create' element={<AddPost />} />
+        <Route path=':id' element={<Post />} />
+      </Route>
+
       <Route path="user">
-        <Route element={<Users />} />
+        <Route index={true} element={<Users />} />
         <Route path=":id" element={<ProfileUser />} />
       </Route>
 
