@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setCredentials, selectUserInfo, selectUser, register, login } from "../../features/auth/authSlice"
+import { register, login } from "../../features/auth/authSlice"
 import { redirect } from 'react-router-dom'
 
 const initialState = { name: "", email: "", password: "", role: "normal" }
@@ -8,8 +8,7 @@ const initialState = { name: "", email: "", password: "", role: "normal" }
 export default function Register() {
 
     let message;
-    const { id, role } = useSelector(selectUser)
-    const userInfo = useSelector(selectUserInfo)
+    let userInfo = null;
 
     const dispatch = useDispatch()
     const [switchMode, setSwitchMode] = useState(false)
@@ -28,43 +27,41 @@ export default function Register() {
         setData(initialState)
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setSwitchMode(!switchMode)
-        try {
-            if (switchMode) {
-                dispatch((register({
-                    name: data.name,
-                    email: data.email,
-                    password: data.password,
-                    role: data.role,
-                })))
-            } else if (!switchMode) {
-                dispatch((login({ email: data.email, password: data.password, })))
-            }
-            if (userInfo) {
-                redirect('/post')
-                message = "you have successfully logged in"
-            } else {
-                message = "please fill all the fields and try again correctly"
-            }
-        }
-        catch (err) {
-            throw new Error(err)
-        }
-        clear()
-    }
 
     useEffect(() => {
-        dispatch(setCredentials({ id, role }))
-    }, [dispatch, selectUser, switchMode])
+        const handleSubmit = (e) => {
+            e.preventDefault()
+            console.log(userInfo);
+            try {
+                if (switchMode) {
+                    dispatch((register(data.name, data.email, data.password, data.role)))
+                } else if (!switchMode) {
+                    dispatch((login(data.email, data.password,)))
+                }
+                userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            }
+            catch (err) {
+                throw new Error(err)
+            }
+            clear()
+        }
+
+        if (userInfo) {
+            message = 'you are logged in'
+            redirect('/')
+        }
+        return () => {
+            message = 'you are logged out'
+        }
+
+    }, [dispatch])
 
     const canSubmit = [data].every(Boolean) //&& data.password.length >= 6;
 
     return (
         <section className="mt-5 m-auto max-w-2xl p-8">
             {
-                userInfo &&
+                !userInfo &&
 
                 <div className="m-auto max-w-2xl p-4">
                     <h2 className="text-2xl font-semibold">{switchMode ? "Create Account" : "Login"}</h2>
