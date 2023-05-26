@@ -11,6 +11,8 @@ import Post from './pages/Posts/post/Post'
 //users
 import Users from './pages/Users/users'
 import ProfileUser from './pages/Users/user/profileUser'
+//AuthPage
+import Authentication from './pages/auth/Auth'
 
 import NoMatch from './components/error/noMatch'
 import ErrorPage from './components/error/error-page'
@@ -30,6 +32,7 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<ErrorPage />} element={<App />} >
 
       <Route index={true} element={<Home />} />
+      <Route path='auth' element={<Authentication />} />
 
       <Route path='post' >
         <Route index={true} element={<ListPosts />} />

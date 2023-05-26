@@ -21,20 +21,27 @@ export default function AddPost() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(addPostSuccess(data))
+        try {
+            dispatch(addPostSuccess(data.title, data.body))
+        }
+        catch (err) {
+            throw new Error(err)
+        }
         setData({
             title: '',
             body: ''
         })
     }
 
+    const canSave = [data].every(Boolean) //&& addRequestStatus === 'idle';
+
     return (
-        <div className="mt-5 m-auto max-w-2xl p-8 rounded-lg bg-fuchsia-700">
-            <h2 className="text-2xl text-white font-semibold">This Is AddPost</h2>
-            <form onSubmit={handleSubmit} className="py-6 grid grid-cols-1">
+        <div className="mt-5 m-auto max-w-2xl p-8">
+            <h2 className="text-2xl font-semibold">This Is AddPost</h2>
+            <form onSubmit={handleSubmit} className="py-6 gap-6 grid grid-cols-1">
                 <input className="input" type="text" name="title" onChange={handleChange} value={data.title} placeholder="Title" />
                 <input className="input" type="text" name="body" onChange={handleChange} value={data.body} placeholder="Body" />
-                <button className="btn mt-6" type="submit">Add Post</button>
+                <button disabled={!canSave} className="btn mt-6" type="submit">Add Post</button>
             </form>
         </div>
     )

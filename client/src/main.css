@@ -27,7 +27,6 @@ textarea,
 button,
 select {
   font: inherit;
-  margin-bottom: 1em;
 }
 
 header {
@@ -54,6 +53,7 @@ nav {
 nav ul {
   list-style-type: none;
   display: flex;
+  align-items: center;
 }
 
 nav ul li {
@@ -64,7 +64,7 @@ nav ul li {
 nav a,
 nav a:visited {
   color: #fff;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 
 nav a:hover,
@@ -77,19 +77,21 @@ main {
   margin: auto;
 }
 
-section {
-  margin-top: 1em;
-}
-
 article {
+  background-color: #555;
   margin: 0.5em;
-  border: 1px solid #000;
   border-radius: 10px;
   padding: 1em;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+article:hover {
+  background-color: #333;
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.2rem;
 }
 
 p {
@@ -110,10 +112,10 @@ textarea {
 
 @layer components {
   .btn {
-    @apply px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 duration-300 ease-in-out font-semibold;
+    @apply px-4 py-2 bg-[#800080] text-white rounded-md hover:bg-[#610661] duration-300 ease-in-out font-semibold;
   }
 
   .input {
-    @apply px-4 py-2 border-purple-600 border-4 rounded-md hover:border-purple-700 duration-300 ease-in-out outline-none;
+    @apply px-4 py-2 rounded-sm border-b-4 focus-within:border-purple-500 duration-300 ease-in-out shadow-2xl shadow-stone-400 outline-none;
   }
 }

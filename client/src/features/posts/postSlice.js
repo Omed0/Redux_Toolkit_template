@@ -1,39 +1,49 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { sub } from 'date-fns'
+
 
 const initialState = {
     posts: [],
-    status: 'idle',
+    status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
     error: null
 }
 
+let min = 1;
+
 const postSlice = createSlice({
-    name: 'post',
+    name: 'posts',
     initialState,
     reducers: {
-        getPostsLoading: (state, action) => {
-            state.status = 'loading'
+        addPostSuccess: {
+            reducer: (state, action) => {
+                state.status = 'success'
+                state.posts.push(action.payload)
+            },
+            prepare: (title, body) => {
+                return {
+                    payload: {
+                        id: nanoid(),
+                        title,
+                        body,
+                        date: sub(new Date(), { minutes: min++ }).toLocaleString('en-US', { timeZone: 'UTC' }),
+                        since: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
+                    },
+                }
+            }
         },
-        getPostsSuccess: (state, action) => {
-            state.status = 'success'
-            state.posts = action.payload
-        },
-        addPostSuccess: (state, action) => {
-            state.status = 'success'
-            state.posts.push(action.payload)
-        },
+
         deletePostSuccess: (state, action) => {
             state.status = 'success'
-            state.posts = state.posts.filter(post => post._id !== action.payload)
-        },
-        PostsFailure: (state, action) => {
-            state.status = 'failure'
-            state.error = action.payload
+            state.posts = state.posts.filter(post => post.id !== action.payload)
         },
     }
 })
 
-export const selectAllPosts = state => state.post.posts
+export const selectAllPosts = (state) => state.posts.posts;
+export const getPostStatus = (state) => state.posts.status;
+export const getPostError = (state) => state.posts.error;
 
-export const { getPostsLoading, getPostsSuccess, addPostSuccess, deletePostSuccess, PostsFailure } = postSlice.actions;
+
+export const { addPostSuccess, deletePostSuccess } = postSlice.actions;
 
 export default postSlice.reducer
