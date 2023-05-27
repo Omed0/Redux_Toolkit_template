@@ -27,11 +27,13 @@ const authSlice = createSlice({
         },
         login: {
             reducer: (state, action) => {
-                state.user.find(user => {
-                    if (user.email === action.payload.email && user.password === action.payload.password) {
-                        return localStorage.setItem('userInfo', JSON.stringify({ id: user.id, role: user.role }))
+                for (const key in state.user) {
+                    if (state.user[key].email === action.payload.email && state.user[key].password === action.payload.password) {
+                        localStorage.setItem('userInfo', JSON.stringify({ id: state.user[key].id, role: state.user[key].role }));
                     }
-                })
+                }
+                // Add the return statement here
+                return state;
             },
             prepare: (email, password) => {
                 return {
@@ -42,6 +44,7 @@ const authSlice = createSlice({
                 }
             }
         },
+
         logout: (state, action) => {
             state.userInfo = null
             localStorage.removeItem('userInfo')

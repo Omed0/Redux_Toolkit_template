@@ -27,31 +27,32 @@ export default function Register() {
         setData(initialState)
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(userInfo);
+        try {
+            if (switchMode) {
+                dispatch((register(data.name, data.email, data.password, data.role)))
+            } else if (!switchMode) {
+                dispatch((login(data.email, data.password,)))
+            }
+        }
+        catch (err) {
+            throw new Error(err)
+        }
+        clear()
+    }
 
     useEffect(() => {
-        const handleSubmit = (e) => {
-            e.preventDefault()
-            console.log(userInfo);
-            try {
-                if (switchMode) {
-                    dispatch((register(data.name, data.email, data.password, data.role)))
-                } else if (!switchMode) {
-                    dispatch((login(data.email, data.password,)))
-                }
-                userInfo = JSON.parse(localStorage.getItem('userInfo'))
-            }
-            catch (err) {
-                throw new Error(err)
-            }
-            clear()
-        }
+
+        userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
         if (userInfo) {
-            message = 'you are logged in'
+            console.log("you are logged in");
             redirect('/')
         }
         return () => {
-            message = 'you are logged out'
+            console.log('you are logged out');
         }
 
     }, [dispatch])

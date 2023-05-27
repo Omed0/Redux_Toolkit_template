@@ -78,6 +78,7 @@ main {
 }
 
 article {
+  min-width: 640px;
   background-color: #555;
   margin: 0.5em;
   border-radius: 10px;

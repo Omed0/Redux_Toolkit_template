@@ -25,7 +25,6 @@ const postSlice = createSlice({
                         id: nanoid(),
                         title,
                         body,
-                        date: sub(new Date(), { minutes: min++ }).toLocaleString('en-US', { timeZone: 'UTC' }),
                         since: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
                     },
                 }

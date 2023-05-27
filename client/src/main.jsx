@@ -9,7 +9,7 @@ import AddPost from './pages/Posts/addPost/AddPost'
 import ListPosts from './pages/Posts/Posts'
 import Post from './pages/Posts/post/Post'
 //users
-import Users from './pages/Users/users'
+import Users from './pages/users/users'
 import ProfileUser from './pages/Users/user/profileUser'
 //AuthPage
 import Authentication from './pages/auth/Auth'
